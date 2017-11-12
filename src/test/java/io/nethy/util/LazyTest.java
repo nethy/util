@@ -23,10 +23,12 @@
  ******************************************************************************/
 package io.nethy.util;
 
-import java.util.function.Supplier;
-
 import org.junit.Assert;
 import org.junit.Test;
+
+import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.CoreMatchers.is;
+import static org.junit.Assert.assertThat;
 
 public class LazyTest {
 
@@ -34,21 +36,21 @@ public class LazyTest {
   private Lazy<Boolean> lazy = Lazy.of(mutable);
 
   @Test(expected = NullPointerException.class)
-  public void whenSupplierIsNullThrowException() throws Exception {
+  public void constructor_supplier_is_null() throws Exception {
     Lazy.of(null);
   }
 
   @Test
-  public void whenSupplierGivenThenDoNotInvoke() throws Exception {
-    Assert.assertEquals(false, mutable.getValue());
+  public void constructor_does_not_invoke_supplier() throws Exception {
+    assertThat(mutable.isInvoked(), is(false));
   }
 
   @Test
-  public void whenSupplierGivenThenCalculateOnRequest() throws Exception {
+  public void get_invokes_supplier() throws Exception {
     Boolean value = lazy.get();
 
-    Assert.assertEquals(true, value);
-    Assert.assertEquals(value, mutable.getValue());
+    assertThat(value, equalTo(true));
+    assertThat(mutable.isInvoked(), equalTo(value));
   }
 
   public static class MutableSupplier implements Supplier<Boolean> {
@@ -61,7 +63,7 @@ public class LazyTest {
       return b;
     }
 
-    public Boolean getValue() {
+    public Boolean isInvoked() {
       return b;
     }
   }

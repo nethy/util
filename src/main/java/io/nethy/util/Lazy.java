@@ -25,25 +25,23 @@ package io.nethy.util;
 
 import java.io.IOException;
 import java.io.ObjectOutputStream;
-import java.util.Objects;
-import java.util.function.Supplier;
+import java.io.Serializable;
 
-public class Lazy<T> implements Supplier<T> {
+public class Lazy<T> implements Supplier<T>, Serializable {
   private volatile transient Supplier<? extends T> supplier;
   private T value;
 
-  public static <T> Lazy<T> of(Supplier<? extends T> supplier) {
-    Objects.requireNonNull(supplier);
-    return new Lazy<>(supplier);
+  public static <A> Lazy<A> of(Supplier<? extends A> supplier) {
+    return new Lazy<A>(supplier);
   }
 
   private Lazy(Supplier<? extends T> supplier) {
-    this.supplier = supplier;
+    this.supplier = Objects.requireNonNull(supplier);;
   }
 
   @Override
   public T get() {
-    return supplier == null ? value : getValue();
+    return isEvaluated() ? value : getValue();
   }
 
   private synchronized T getValue() {
@@ -55,26 +53,26 @@ public class Lazy<T> implements Supplier<T> {
     return value;
   }
 
-  private boolean isEvaulated() {
+  private boolean isEvaluated() {
     return supplier == null;
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(get());
+    return Objects.hash().of(get()).get();
   }
 
   @Override
   public boolean equals(Object obj) {
     return (obj == this)
         || (obj instanceof Lazy
-            && Objects.equals(((Lazy<?>) obj).get(), get()));
+            && ((Lazy<?>) obj).get().equals(get()));
   }
 
   @Override
   public String toString() {
     return ObjectPresenter.of(this)
-                          .append("isEvaulated", isEvaulated())
+                          .append("isEvaluated", isEvaluated())
                           .append("value", value)
                           .toString();
   }

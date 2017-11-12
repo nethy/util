@@ -23,33 +23,36 @@
  ******************************************************************************/
 package io.nethy.util;
 
-import java.util.function.Function;
-
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 public class ObjectPresenterTest {
   private static final String CLASS_NAME = "AClass";
-  private static final String TEMPLATE = CLASS_NAME + "{%s}";
+  private static final String TEMPLATE = CLASS_NAME + "(%s)";
+
+  public static ObjectPresenter newPresenter() {
+    return ObjectPresenter.of(new AClass());
+  }
 
   @Test
   public void whenClassHasNoFieldsThenOmitOpeningClosingBraces() {
-    String toString = ObjectPresenter.of(new AClass()).toString();
+    String toString = newPresenter().toString();
 
-    Assert.assertEquals("AClass{}", toString);
+    Assert.assertEquals("AClass()", toString);
   }
 
   @Test
   public void whenClassContainsFiledThenPrint() throws Exception {
-    testField(op -> op.append("byte", (byte) 1), "byte=1");
-    testField(op -> op.append("short", (short) 1), "short=1");
-    testField(op -> op.append("int", 1), "int=1");
-    testField(op -> op.append("long", 1L), "long=1");
-    testField(op -> op.append("float", 1.1F), "float=1.1");
-    testField(op -> op.append("double", 1.1), "double=1.1");
-    testField(op -> op.append("boolean", true), "boolean=true");
-    testField(op -> op.append("char", 'b'), "char=b");
-    testField(op -> op.append("object", new AClass()), "object=AClass{}");
+    testField(newPresenter().append("byte", (byte) 1), "byte=1");
+    testField(newPresenter().append("short", (short) 1), "short=1");
+    testField(newPresenter().append("long", 1L), "long=1");
+    testField(newPresenter().append("int", 1), "int=1");
+    testField(newPresenter().append("float", 1.1F), "float=1.1");
+    testField(newPresenter().append("double", 1.1), "double=1.1");
+    testField(newPresenter().append("boolean", true), "boolean=true");
+    testField(newPresenter().append("char", 'b'), "char=b");
+    testField(newPresenter().append("object", new AClass()), "object=AClass()");
   }
 
   @Test
@@ -58,12 +61,12 @@ public class ObjectPresenterTest {
                                      .append("nullField", null)
                                      .toString();
 
-    Assert.assertEquals("AClass{nullField=null}", toString);
+    Assert.assertEquals("AClass(nullField=null)", toString);
   }
 
   @Test
   public void whenClassContainsMultipleFields() throws Exception {
-    testField(op -> op.append("a", 1).append("b", "test"), "a=1,b=test");
+    testField(newPresenter().append("a", 1).append("b", "test"), "a=1,b=test");
   }
 
   @Test(expected = NullPointerException.class)
@@ -71,9 +74,9 @@ public class ObjectPresenterTest {
     ObjectPresenter.of(null);
   }
 
-  private void testField(Function<ObjectPresenter, ObjectPresenter> f, String expected) {
+  private void testField(ObjectPresenter presenter, String expected) {
     ObjectPresenter op = ObjectPresenter.of(new AClass());
-    String toString = f.apply(op).toString();
+    String toString = presenter.toString();
 
     Assert.assertEquals(String.format(TEMPLATE, expected), toString);
   }

@@ -23,24 +23,21 @@
  ******************************************************************************/
 package io.nethy.util;
 
-import java.util.Objects;
-import java.util.function.BiPredicate;
-
-public final class ObjectComparator<T> {
+public final class ObjectComparator {
 
   @SuppressWarnings("unchecked")
-  public static <T> boolean isEqual(T current,
+  public static <A> boolean isEqual(A current,
                                     Object other,
-                                    BiPredicate<T, T> comparision) {
+                                    BiPredicate<A, A> predicate) {
     Objects.requireNonNull(current);
-    Objects.requireNonNull(comparision);
+    Objects.requireNonNull(predicate);
     boolean isEqual = false;
     if (current == other) {
       isEqual = true;
     } else if (other == null) {
       isEqual = false;
     } else if (isSubtype(current, other)) {
-      isEqual = comparision.test(current, (T) other);
+      isEqual = predicate.test(current, (A) other);
     } else if (isSubtype(other, current)) {
       isEqual = other.equals(current);
     }

@@ -23,11 +23,10 @@
  ******************************************************************************/
 package io.nethy.util;
 
-import java.util.Objects;
 
 public final class ObjectPresenter {
-  private static final char OPENING = '{';
-  private static final char CLOSING = '}';
+  private static final char OPENING = '(';
+  private static final char CLOSING = ')';
   private static final char VALUE_DELIMITER = '=';
   private static final char FIELD_DELIMITER = ',';
 
