@@ -27,3 +27,6 @@ nbdist/
 ### Gradle ###
 .gradle/
 out/
+
+### Generic ###
+.*

@@ -21,7 +21,7 @@ ObjectPresenter.of(this)
 
 It makes easier to implement the `Object.equals` methods.
 
-Use the `isEqual` method to define comparision between two instances.
+Use the `isEqual` method to define comparison between two instances.
 
 1. If `this == obj`, then method will return `true`.
 1. If `obj == null`, then method will return `false`.
@@ -44,3 +44,13 @@ public class AClass {
   }
 }
 ```
+
+## Validation
+
+Helps in validation multiple arguments and aggregates errors into a list.
+
+Methods:
+* `isValid` - determines it is valid or not.
+* `and` - aggregates multiple `Validation`s.
+* `map` - transforms valid value.
+* `reduce` - transforms `Validation` into other type.
