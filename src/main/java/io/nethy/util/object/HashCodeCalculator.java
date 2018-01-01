@@ -1,4 +1,4 @@
-package io.nethy.util;
+package io.nethy.util.object;
 
 public final class HashCodeCalculator {
   private static final int PRIME = 37;
@@ -11,17 +11,17 @@ public final class HashCodeCalculator {
   }
 
   public HashCodeCalculator of(byte b) {
-    addPartialValue((int) b);
+    addPartialValue(b);
     return this;
   }
 
   public HashCodeCalculator of(char c) {
-    addPartialValue((int) c);
+    addPartialValue(c);
     return this;
   }
 
   public HashCodeCalculator of(short s) {
-    addPartialValue((int) s);
+    addPartialValue(s);
     return this;
   }
 

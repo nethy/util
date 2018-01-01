@@ -1,4 +1,4 @@
-package io.nethy.util;
+package io.nethy.util.object;
 
 public final class Objects {
 

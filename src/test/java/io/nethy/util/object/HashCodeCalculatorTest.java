@@ -1,10 +1,9 @@
-package io.nethy.util;
-
-import org.junit.Before;
-import org.junit.Test;
+package io.nethy.util.object;
 
 import static org.hamcrest.CoreMatchers.equalTo;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
+
+import org.junit.Test;
 
 public class HashCodeCalculatorTest {
   private static final int PRIME = 37;
