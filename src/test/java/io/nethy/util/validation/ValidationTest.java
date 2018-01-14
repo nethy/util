@@ -19,31 +19,34 @@ public class ValidationTest {
       return a + 1;
     }
   };
-  private static final F2<Integer, Integer, Integer> INC2 = new F2<Integer, Integer, Integer>() {
-    @Override
-    public Integer apply(Integer a, Integer b) {
-      return a + b + 1;
-    }
-  };
-  private static final F3<Integer,
-                          Integer,
-                          Integer,
-                          Integer> INC3 = new F3<Integer, Integer, Integer, Integer>() {
-                            @Override
-                            public Integer apply(Integer a, Integer b, Integer c) {
-                              return a + b + c + 1;
-                            }
-                          };
-  private static final F4<Integer,
-                          Integer,
-                          Integer,
-                          Integer,
-                          Integer> INC4 = new F4<Integer, Integer, Integer, Integer, Integer>() {
-                            @Override
-                            public Integer apply(Integer a, Integer b, Integer c, Integer d) {
-                              return a + b + c + d + 1;
-                            }
-                          };
+  private static final F2<Integer, Integer, Integer> INC2 =
+    new F2<Integer, Integer, Integer>() {
+      @Override
+      public Integer apply(Integer a, Integer b) {
+        return a + b + 1;
+      }
+    };
+  private static final F3<
+    Integer,
+    Integer,
+    Integer,
+    Integer> INC3 = new F3<Integer, Integer, Integer, Integer>() {
+      @Override
+      public Integer apply(Integer a, Integer b, Integer c) {
+        return a + b + c + 1;
+      }
+    };
+  private static final F4<
+    Integer,
+    Integer,
+    Integer,
+    Integer,
+    Integer> INC4 = new F4<Integer, Integer, Integer, Integer, Integer>() {
+      @Override
+      public Integer apply(Integer a, Integer b, Integer c, Integer d) {
+        return a + b + c + d + 1;
+      }
+    };
   private static final F1<String, Integer> LENGTH = new F1<String, Integer>() {
     @Override
     public Integer apply(String a) {
@@ -85,7 +88,8 @@ public class ValidationTest {
 
   @Test
   public void reduce_invalid() throws Exception {
-    assertThat(validate(1).reduce(INC1, LENGTH)).isEqualTo(INVALID.length() + 1);
+    assertThat(validate(1).reduce(INC1, LENGTH))
+      .isEqualTo(INVALID.length() + 1);
   }
 
   @Test
@@ -104,54 +108,68 @@ public class ValidationTest {
 
   @Test
   public void map_double_valid() throws Exception {
-    Validation<Integer, List<String>> validation = validate(2).and(validate(2)).map(INC2);
+    Validation<Integer, List<String>> validation =
+      validate(2).and(validate(2)).map(INC2);
 
     assertThat(validation.get()).isEqualTo(5);
   }
 
   @Test
   public void map_double_invalid() throws Exception {
-    Validation<Integer, List<String>> validation = validate(1).and(validate(1)).map(INC2);
+    Validation<Integer, List<String>> validation =
+      validate(1).and(validate(1)).map(INC2);
 
     assertThat(validation.getError()).containsExactly(INVALID, INVALID);
   }
 
   @Test
   public void map_triple_valid() throws Exception {
-    Validation<Integer,
-               List<String>> validation = validate(2).and(validate(2)).and(validate(2)).map(INC3);
+    Validation<
+      Integer,
+      List<String>> validation =
+        validate(2).and(validate(2)).and(validate(2)).map(INC3);
 
     assertThat(validation.get()).isEqualTo(7);
   }
 
   @Test
   public void map_triple_invalid() throws Exception {
-    Validation<Integer,
-               List<String>> validation = validate(1).and(validate(1)).and(validate(1)).map(INC3);
+    Validation<
+      Integer,
+      List<String>> validation =
+        validate(1).and(validate(1)).and(validate(1)).map(INC3);
 
-    assertThat(validation.getError()).containsExactly(INVALID, INVALID, INVALID);
+    assertThat(validation.getError())
+      .containsExactly(INVALID, INVALID, INVALID);
   }
 
   @Test
   public void map_quadruple_valid() throws Exception {
-    Validation<Integer,
-               List<String>> validation = validate(2).and(validate(2))
-                                                     .and(validate(2))
-                                                     .and(validate(2))
-                                                     .map(INC4);
+    Validation<
+      Integer,
+      List<String>> validation =
+        validate(2)
+          .and(validate(2))
+          .and(validate(2))
+          .and(validate(2))
+          .map(INC4);
 
     assertThat(validation.get()).isEqualTo(9);
   }
 
   @Test
   public void map_quadruple_invalid() throws Exception {
-    Validation<Integer,
-               List<String>> validation = validate(1).and(validate(1))
-                                                     .and(validate(1))
-                                                     .and(validate(1))
-                                                     .map(INC4);
+    Validation<
+      Integer,
+      List<String>> validation =
+        validate(1)
+          .and(validate(1))
+          .and(validate(1))
+          .and(validate(1))
+          .map(INC4);
 
-    assertThat(validation.getError()).containsExactly(INVALID, INVALID, INVALID, INVALID);
+    assertThat(validation.getError())
+      .containsExactly(INVALID, INVALID, INVALID, INVALID);
   }
 
   private static Validation<Integer, String> validate(int i) {

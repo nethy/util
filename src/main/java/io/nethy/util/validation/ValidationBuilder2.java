@@ -18,13 +18,14 @@ public class ValidationBuilder2<A, B, E> extends ValidationBuilder {
     return new ValidationBuilder3<>(a, b, other);
   }
 
-  @SuppressWarnings("unchecked")
   public <C> Validation<C, List<E>> map(F2<A, B, C> f) {
     List<E> errors = collectErrors(a, b);
 
     if (errors.isEmpty()) {
-      return Validation.valid(f.apply(a.get(),
-                                      b.get()));
+      return Validation.valid(
+        f.apply(
+          a.get(),
+          b.get()));
     } else {
       return Validation.invalid(errors);
     }

@@ -20,47 +20,56 @@ public final class ObjectPresenter {
   }
 
   public ObjectPresenter append(String variableName, byte value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 
   public ObjectPresenter append(String variableName, short value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 
   public ObjectPresenter append(String variableName, int value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 
   public ObjectPresenter append(String variableName, long value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 
   public ObjectPresenter append(String variableName, float value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 
   public ObjectPresenter append(String variableName, double value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 
   public ObjectPresenter append(String variableName, boolean value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 
   public ObjectPresenter append(String variableName, char value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 
   public ObjectPresenter append(String variableName, Object value) {
-    output.append(variableName).append(VALUE_DELIMITER).append(value).append(FIELD_DELIMITER);
+    output.append(variableName).append(VALUE_DELIMITER).append(value).append(
+      FIELD_DELIMITER);
     return this;
   }
 

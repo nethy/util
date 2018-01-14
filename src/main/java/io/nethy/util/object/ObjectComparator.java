@@ -5,7 +5,8 @@ import io.nethy.util.BiPredicate;
 public final class ObjectComparator {
 
   @SuppressWarnings("unchecked")
-  public static <A> boolean isEqual(A current, Object other, BiPredicate<A, A> predicate) {
+  public static <
+    A> boolean isEqual(A current, Object other, BiPredicate<A, A> predicate) {
     Objects.requireNonNull(current);
     Objects.requireNonNull(predicate);
     boolean isEqual = false;

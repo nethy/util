@@ -36,23 +36,25 @@ public class Lazy<T> implements Supplier<T> {
 
   @Override
   public int hashCode() {
-    return Objects.hash()
-                  .of(get())
-                  .get();
+    return Objects
+      .hash()
+      .of(get())
+      .get();
   }
 
   @Override
   public boolean equals(Object obj) {
     return (obj == this)
-        || (obj instanceof Lazy
-            && ((Lazy<?>) obj).get().equals(get()));
+      || (obj instanceof Lazy
+        && ((Lazy<?>) obj).get().equals(get()));
   }
 
   @Override
   public String toString() {
-    return ObjectPresenter.of(this)
-                          .append("isEvaluated", isEvaluated())
-                          .append("value", value)
-                          .toString();
+    return ObjectPresenter
+      .of(this)
+      .append("isEvaluated", isEvaluated())
+      .append("value", value)
+      .toString();
   }
 }

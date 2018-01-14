@@ -33,9 +33,11 @@ public class ObjectPresenterTest {
 
   @Test
   public void whenValueIsNullThenPrintNull() throws Exception {
-    String toString = ObjectPresenter.of(new AClass())
-                                     .append("nullField", null)
-                                     .toString();
+    String toString =
+      ObjectPresenter
+        .of(new AClass())
+        .append("nullField", null)
+        .toString();
 
     Assert.assertEquals("AClass(nullField=null)", toString);
   }
@@ -51,7 +53,8 @@ public class ObjectPresenterTest {
   }
 
   private void testField(ObjectPresenter presenter, String expected) {
-    Assert.assertEquals(String.format(TEMPLATE, expected), presenter.toString());
+    Assert
+      .assertEquals(String.format(TEMPLATE, expected), presenter.toString());
   }
 
   public static class AClass {

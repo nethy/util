@@ -36,7 +36,9 @@ public class HashCodeCalculatorTest {
 
   @Test
   public void of_long() throws Exception {
-    assertThat(Objects.hash().of((long) Math.pow(2, 33)).get(), equalTo(PRIME + 2));
+    assertThat(
+      Objects.hash().of((long) Math.pow(2, 33)).get(),
+      equalTo(PRIME + 2));
   }
 
   @Test
@@ -51,7 +53,9 @@ public class HashCodeCalculatorTest {
 
   @Test
   public void of_not_null() throws Exception {
-    assertThat(Objects.hash().of("test").get(), equalTo(PRIME + "test".hashCode()));
+    assertThat(
+      Objects.hash().of("test").get(),
+      equalTo(PRIME + "test".hashCode()));
   }
 
   @Test
